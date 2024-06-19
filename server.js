@@ -1,7 +1,7 @@
 const express = require('express');
 const mysql = require("mysql2");
 const fs = require('fs');
-
+const env = require('dotenv').config();
 const app = express();
 app.listen(3000, () => console.log('listening on port 3000'));
 app.use(express.static('public'));
@@ -10,10 +10,10 @@ app.use(express.json({ limit: '1mb' }));
 
 // Create connection to SQL habit_storage
 const db = mysql.createConnection({
-    host: "habitual-app.cndl3kzgxkn9.us-east-2.rds.amazonaws.com",
-    user: "admin",
-    password: "Aser0545!",
-    database: "Habitual"
+    host: "env.DB_HOST",
+    user: "env.DB_USER",
+    password: "env.DB_PW",
+    database: "env.DB_NAME"
 });
 db.connect((err) => {
     if(err) {throw err; }
